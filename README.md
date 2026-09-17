@@ -1,4 +1,4 @@
-# Portfolio: Mariana Castellanos Vizcarra
+# Portfolio: Mariana Vizcarra
 
 Personal portfolio site for a data analyst, built as a static page (no framework, no build step) and hosted on GitHub Pages.
 
