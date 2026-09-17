@@ -2,7 +2,7 @@
 
 Personal portfolio site for a data analyst, built as a static page (no framework, no build step) and hosted on GitHub Pages.
 
-**Live:** `https://<username>.github.io/github_pages/` (or `<username>.github.io` if served from a `<username>.github.io` repo)
+**Live:** https://marianavizcarra.github.io
 
 ## Stack
 
