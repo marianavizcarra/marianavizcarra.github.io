@@ -5,10 +5,9 @@
   --paper: #ffffff;
   --paper-alt: #f6f7f9;
   --line: #e6e8ee;
-  --accent: #2563eb;
-  --accent-dark: #1d4ed8;
-  --accent-soft: #eff4fe;
-  --radius: 10px;
+  --accent: #186a4f;
+  --accent-dark: #10503c;
+  --accent-soft: #edf5f0;
   --maxw: 980px;
   --font: "Avenir Next", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
 }
@@ -16,6 +15,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 76px; }
 
 body {
   font-family: var(--font);
@@ -48,8 +48,9 @@ a:hover { color: var(--accent-dark); }
 .menu a { color: var(--ink-soft); font-size: 0.95rem; font-weight: 500; transition: color 0.15s ease; }
 .menu a:hover { color: var(--ink); }
 .menu-cta {
-  padding: 8px 16px; border-radius: 999px;
+  padding: 8px 16px;
   background: var(--ink); color: #fff !important; font-weight: 600 !important;
+  border-radius: 4px;
   transition: background 0.15s ease;
 }
 .menu-cta:hover { background: var(--accent); }
@@ -68,11 +69,11 @@ a:hover { color: var(--accent-dark); }
 .hero-actions { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
 
 .btn {
-  display: inline-block; padding: 13px 26px; border-radius: 999px;
+  display: inline-block; padding: 13px 26px; border-radius: 4px;
   font-weight: 600; font-size: 0.98rem; transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 .btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { background: var(--accent-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25); }
+.btn-primary:hover { background: var(--accent-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(24, 106, 79, 0.25); }
 .btn-ghost { color: var(--ink); border: 1.5px solid var(--line); background: #fff; }
 .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
 
@@ -113,8 +114,8 @@ a:hover { color: var(--accent-dark); }
 .timeline-item { position: relative; padding-left: 40px; padding-bottom: 44px; }
 .timeline-item:last-child { padding-bottom: 0; }
 .timeline-item::before {
-  content: ""; position: absolute; left: 0; top: 7px; width: 16px; height: 16px;
-  border-radius: 50%; background: var(--paper); border: 3px solid var(--accent);
+  content: ""; position: absolute; left: 0; top: 7px; width: 14px; height: 14px;
+  background: var(--paper); border: 3px solid var(--accent);
 }
 .timeline-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
 .timeline-meta span:last-child { color: var(--ink-faint); font-weight: 500; }
@@ -126,10 +127,10 @@ a:hover { color: var(--accent-dark); }
 /* ---------- Projects ---------- */
 .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .project-card {
-  background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 28px 30px; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  background: #fff; border: 1px solid var(--line);
+  padding: 28px 30px; transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.project-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(26, 31, 46, 0.06); border-color: #d8dce6; }
+.project-card:hover { box-shadow: 0 10px 24px rgba(26, 31, 46, 0.06); border-color: #c9cfd9; }
 .project-tag {
   display: inline-block; background: var(--accent-soft); color: var(--accent-dark);
   font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
@@ -160,11 +161,11 @@ a:hover { color: var(--accent-dark); }
 /* ---------- CTA ---------- */
 .cta {
   text-align: center; background: var(--ink); color: #fff;
-  border-radius: 12px; padding: 64px 24px !important; max-width: calc(var(--maxw) - 0px);
+  padding: 64px 24px !important; max-width: calc(var(--maxw) - 0px);
 }
 .cta h2 { color: #fff; margin-bottom: 10px; }
 .cta p { color: #b9bdc9; margin-bottom: 28px; }
-.cta .btn-primary { box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4); }
+.cta .btn-primary { box-shadow: 0 10px 30px rgba(16, 80, 60, 0.4); }
 
 /* ---------- Footer ---------- */
 .footer { border-top: 1px solid var(--line); padding: 30px 0; margin-top: 72px; }
@@ -174,10 +175,11 @@ a:hover { color: var(--accent-dark); }
 .to-top:hover { color: var(--ink); }
 
 /* ---------- Reveal animation ---------- */
-.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.reveal.visible { opacity: 1; transform: none; }
+/* Hidden state only applies when JS has tagged the document (.js), so content is never lost */
+.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.45s ease, transform 0.45s ease; }
+.js .reveal.visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
 }
 

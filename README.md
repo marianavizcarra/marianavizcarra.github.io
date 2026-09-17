@@ -1,4 +1,4 @@
-# Portfolio — Mariana Castellanos Vizcarra
+# Portfolio: Mariana Castellanos Vizcarra
 
 Personal portfolio site for a data analyst, built as a static page (no framework, no build step) and hosted on GitHub Pages.
 
@@ -7,7 +7,7 @@ Personal portfolio site for a data analyst, built as a static page (no framework
 ## Stack
 
 - Plain HTML + CSS + a few lines of vanilla JS (scroll reveal, mobile menu)
-- Zero dependencies, zero build step — push to deploy
+- Zero dependencies, zero build step. Push to deploy
 
 ## Local preview
 
