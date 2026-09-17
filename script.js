@@ -35,4 +35,41 @@
   } else {
     reveals.forEach(function (el) { el.classList.add("visible"); });
   }
+
+  var nav = document.querySelector(".nav");
+  if (nav) {
+    var onScroll = function () {
+      nav.classList.toggle("scrolled", window.scrollY > 8);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  var stats = document.querySelectorAll(".stat[data-count]");
+  if (stats.length && "IntersectionObserver" in window) {
+    var counted = false;
+    var statIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || counted) return;
+        counted = true;
+        statIo.unobserve(entry.target);
+        stats.forEach(function (el) {
+          var target = parseInt(el.getAttribute("data-count"), 10);
+          var suffix = el.getAttribute("data-suffix") || "";
+          var start = null;
+          var dur = 700;
+          var step = function (ts) {
+            if (start === null) start = ts;
+            var p = Math.min((ts - start) / dur, 1);
+            p = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(target * p) + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+      });
+    }, { threshold: 0.4 });
+    var heroStats = document.querySelector(".hero-stats");
+    if (heroStats) statIo.observe(heroStats);
+  }
 })();

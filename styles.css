@@ -40,12 +40,19 @@ a:hover { color: var(--accent-dark); }
   background: rgba(255, 255, 255, 0.86);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
+  transition: box-shadow 0.25s ease;
 }
+.nav.scrolled { box-shadow: 0 6px 20px rgba(26, 31, 46, 0.07); }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
 .brand { font-weight: 700; font-size: 1.15rem; color: var(--ink); letter-spacing: 0.01em; }
 .brand-dot { color: var(--accent); }
 .menu { display: flex; align-items: center; gap: 26px; list-style: none; }
-.menu a { color: var(--ink-soft); font-size: 0.95rem; font-weight: 500; transition: color 0.15s ease; }
+.menu a { color: var(--ink-soft); font-size: 0.95rem; font-weight: 500; position: relative; transition: color 0.15s ease; }
+.menu a:not(.menu-cta)::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: -3px; height: 1.5px;
+  background: var(--accent); transition: right 0.22s ease;
+}
+.menu a:not(.menu-cta):hover::after { right: 0; }
 .menu a:hover { color: var(--ink); }
 .menu-cta {
   padding: 8px 16px;
@@ -91,6 +98,8 @@ a:hover { color: var(--accent-dark); }
   content: ""; display: block; width: 44px; height: 3px; border-radius: 2px;
   background: var(--accent); margin-top: 10px;
 }
+.js .section-title::after { transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease 0.15s; }
+.js .section-title.visible::after { transform: scaleX(1); }
 
 #about { padding-top: 24px; }
 .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 900px; }
@@ -176,10 +185,23 @@ a:hover { color: var(--accent-dark); }
 
 /* ---------- Reveal animation ---------- */
 /* Hidden state only applies when JS has tagged the document (.js), so content is never lost */
-.js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.45s ease, transform 0.45s ease; }
-.js .reveal.visible { opacity: 1; transform: none; }
+.js .reveal { opacity: 0; }
+.js .reveal.visible { animation: rise 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) var(--d, 0s) forwards; }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* staggered entrances */
+.js .skills-grid .reveal:nth-child(2) { --d: 0.08s; }
+.js .skills-grid .reveal:nth-child(3) { --d: 0.16s; }
+.js .skills-grid .reveal:nth-child(4) { --d: 0.24s; }
+.js .projects-grid .reveal:nth-child(2) { --d: 0.08s; }
+.js .edu-grid .reveal:nth-child(2) { --d: 0.08s; }
+.js .timeline .reveal:nth-child(2) { --d: 0.08s; }
+
 @media (prefers-reduced-motion: reduce) {
-  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal { opacity: 1; animation: none !important; }
   html { scroll-behavior: auto; }
 }
 
